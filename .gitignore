@@ -1,0 +1,6 @@
+# OSbla
+.DS_Store
+
+# Vagrant
+boxes/*
+/.vagrant
