@@ -16,21 +16,23 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     # Setup
-    DEBIAN_FRONTEND="noninteractive"
-    TERM="xterm"
+    export DEBIAN_FRONTEND="noninteractive"
+    export TERM="xterm"
     # Start up
     apt-get update
     # Essential tools
     apt-get install -y curl vim-nox git make build-essential
     # Python tools
     apt-get install -y python-dev python-pip
-    pip install --upgrade pep-8
+    pip install --upgrade pip
+    pip install pep8
     # Go tools
     apt-get install -y golang
     # Terminal helpers
-    apt-get install -y byobu tree htop atop
-    # Zed FS
-    apt-get install -y zfsutils-linux
+    apt-get install -y byobu tree htop atop jq
+    byobu-enable
+    # Zed FS - perhaps i'll setup this up at some point...
+    # apt-get install -y zfsutils-linux
     # Install docker
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
@@ -38,7 +40,8 @@ Vagrant.configure("2") do |config|
     apt-get install -y docker-engine
     sudo usermod -aG docker vagrant
     # Seed docker
-    docker pull ubuntu:16.04
+    docker pull ubuntu & docker pull ubuntu:14.04 & docker pull centos:centos7 & docker pull centos:centos6
+    wait
     echo "--------------------------"
     echo "- Setup complete.        -"
     echo "--------------------------"
