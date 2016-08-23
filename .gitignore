@@ -4,3 +4,4 @@
 # Vagrant
 boxes/*
 /.vagrant
+/Projects
