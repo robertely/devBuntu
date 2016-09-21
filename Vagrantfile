@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     # Go tools
     apt-get install -y golang
     # Terminal helpers
-    apt-get install -y byobu tree htop atop jq cabal
+    apt-get install -y byobu tree htop atop jq
     byobu-enable
     # Zed FS - perhaps i'll setup this up at some point...
     # apt-get install -y zfsutils-linux
